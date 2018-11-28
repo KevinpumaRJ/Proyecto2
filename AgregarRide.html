@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="modal-body">
+      <input id="nomR"  type="text" /><br>
+      <input id="lSalida" type="text"/><br>
+      <input id="lDestino"  type="text" /><br>
+      <textarea id="Desc" placeholder="Descripcion del ride."></textarea><br>
+      <input id="hSalida"  type="time" /><br>
+      <input id="hLlegada"  type="time" /><br>
+
+      <div class="cont_check">
+        <h3>Selecione los dias...</h3>
+        <input type="checkbox" class="checks" name="lunes" value="Lunes">Lunes
+        <input type="checkbox" class="checks" name="martes" value="Martes">Martes
+        <input type="checkbox" class="checks" name="miercoles" value="Miercoles">Miercoles
+        <input type="checkbox" class="checks" name="jueves" value="Jueves">Jueves
+        <input type="checkbox" class="checks" name="viernes" value="Viernes">Viernes
+        <input type="checkbox" class="checks" name="sabado" value="Sabado">Sabado
+        <input type="checkbox" class="checks" name="domingo" value="Domingo">Domingo
+      </div>
+      <button type="button" id="btnGuardarr" class="btn btn-primary">Guardar Ride</button>
+    </div>
+
+    <script src="js/baseDatos.js" type="text/javascript"></script>
+    <script src="js/generarTabla.js" type="text/javascript"></script>
+
+  </body>
+</html>

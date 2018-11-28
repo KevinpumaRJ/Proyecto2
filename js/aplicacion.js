@@ -80,4 +80,5 @@ function botonLoguin(element) {
 	validarUsu(sUsername, sPass);
 }
 
+
 bindEvents();

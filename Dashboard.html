@@ -4,8 +4,14 @@
     <meta charset="utf-8">
     <title>RIDECLUB</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="vendor/bootstrap/jquery/jquery.min.js"></script>
+
     <!-- Bootstrap nucleo CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="vendor/bootstrap/js/bootstrap.js"></script>
 
     <!-- Fuentes personalizadas -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -37,9 +43,6 @@
             <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Rides</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#">Configuracion</a>
           </li>
           <li class="nav-item dropdown">
@@ -47,26 +50,87 @@
               Opciones
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Configuraciones</a>
+              <a class="dropdown-item" href="#">Salir</a>
             </div>
           </li>
         </ul>
       </div>
     </nav>
 
-    <!-- Custom styles for this template -->
-    <section class="about-section text-center">
+
+    <!-- Seccion de busqueda -->
+    <section class="about-section">
       <div class="contenedor">
-        <center><h1 class="titulo  mx-auto my-0 text-uppercase">Busca tu ride...</h1></center>
+        <center><h2 class="titulo  mx-auto my-0 text-uppercase">Busca tu ride...</h2></center>
         <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" type="search" placeholder="Search" aria-label="Search">
+          <button  type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
         </form>
+        </div>
       </section>
-    </div>
+
+      <!-- Seccion de tabla de rides -->
+      <section>
+        <h2 class="mx-auto my-0 text-uppercase">Mis Rides</h2>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mimodal">
+          Agregar Ride...
+        </button>
+
+        <a href="AgregarRide.html"><button type="button">Agregar Ride...</button></a>
+
+        <table class="table table-light">
+          <tbody id="rides_table">
+          </tbody>
+        </table>
+      </section>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="mimodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Agrega tu Ride</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input id="nomR" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" type="text" placeholder="Nombre del Ride" aria-label="Search"><br>
+              <input id="lSalida" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" type="text" placeholder="Lugar de salida" aria-label="Search"><br>
+              <input id="lDestino" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" type="text" placeholder="Lugar de destino" aria-label="Search"><br>
+              <textarea id="Desc" placeholder="Descripcion del ride."></textarea><br>
+              <input id="hSalida" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" type="time" placeholder="Hora de salida" aria-label="Search"><br>
+              <input id="hLlegada" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" type="time" placeholder="Hora de llegada" aria-label="Search"><br>
+
+              <div class="cont_check">
+                <h3>Selecione los dias...</h3>
+                <input type="checkbox" class="checks" name="lunes" value="Lunes">Lunes
+                <input type="checkbox" class="checks" name="martes" value="Martes">Martes
+                <input type="checkbox" class="checks" name="miercoles" value="Miercoles">Miercoles
+                <input type="checkbox" class="checks" name="jueves" value="Jueves">Jueves
+                <input type="checkbox" class="checks" name="viernes" value="Viernes">Viernes
+                <input type="checkbox" class="checks" name="sabado" value="Sabado">Sabado
+                <input type="checkbox" class="checks" name="domingo" value="Domingo">Domingo
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" id="btnGuardar" class="btn btn-primary">Guardar Ride</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <script src="js/baseDatos.js" type="text/javascript"></script>
+      <script src="js/generarTabla.js" type="text/javascript"></script>
 
   </body>
 </html>
