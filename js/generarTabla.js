@@ -1,24 +1,27 @@
 'use strict';
-/*function obtenerDias(){
-	let listDias = [];
 
+let listRides = [];
+
+function obtenerDias(){
+	let listDias = [];
 	let checkBoxs = document.getElementsByClassName('checks')
 	for (let i = 0; i < 7; i++) {
 		if (checkBoxs[i].checked == true){
 			listDias.push(checkBoxs[i].value);
 		}
 	}
-	return datosRide(listDias);
-}*/
+	return guardarRide(listDias);
+}
 
 
-function guardarRide() {
+function guardarRide(dia) {
 	let nom = document.getElementById('nomR').value;
 	let lugSalida = document.getElementById('lSalida').value;
 	let lugDestino = document.getElementById('lDestino').value;
 	let des = $('#Desc').val();
 	let horaInicio = document.getElementById('hSalida').value;
 	let horaLlegada = document.getElementById('hLlegada').value;
+	let dias = dia;
 	let user = sessionStorage.getItem('Usuario');
 
 
@@ -29,18 +32,24 @@ function guardarRide() {
 		des,
 		horaInicio,
 		horaLlegada,
+		dias,
 		user
 	};
 
 	let rides = insertToTable('rides', ride);
 
-	// render the books
-	renderTable('rides', rides);
-
+	generarTabla('rides', rides);
 
 }
 
-
+function verficarRideUsuario(tableName, tableData){
+		let usu = sessionStorage.getItem('Usuario');
+		usu.forEach(ride => {
+			if (usu == ride.user){
+					generarTabla(nomTabla, tableData);
+			}
+		});
+}
 
 /**
  * Renders an HTML table dinamically
@@ -48,13 +57,13 @@ function guardarRide() {
  * @param tableName
  * @param tableData
  */
-function renderTable(tableName, tableData) {
+function generarTabla(tableName, tableData) {
 	let table = jQuery(`#${tableName}_table`);
 	// loop through all the items of table and generates the html
 	let rows = "";
 	tableData.forEach((rides, index) => {
 		let row = `<tr><td>${rides.nom}</td><td>${rides.lugSalida}</td><td>${rides.lugDestino}</td>
-		<td>${rides.des}</td><td>${rides.horaInicio}</td><td>${rides.horaLlegada}</td>`;
+		<td>${rides.des}</td><td>${rides.horaInicio}</td><td>${rides.horaLlegada}</td><td>${rides.dias}</td>`;
 		row += `<td> <a onclick="editEntity(this)" data-id="${rides.id}" data-entity="${tableName}" class="link edit">Edit</a>  |  <a  onclick="deleteEntity(this);" data-id="${rides.id}" data-entity="${tableName}" class="link delete">Delete</a>  </td>`;
 		rows += row + '</tr>';
 	});
@@ -70,11 +79,11 @@ function editEntity(element) {
 function deleteEntity(element) {
 	const dataObj = jQuery(element).data();
 	const newEntities = deleteFromTable(dataObj.entity, dataObj.id);
-	renderTable(dataObj.entity, newEntities);
+	generarTabla(dataObj.entity, newEntities);
 }
 
 function loadTableData(tableName) {
-	renderTable(tableName, getTableData(tableName));
+	generarTabla(tableName, getTableData(tableName));
 }
 
 
@@ -83,7 +92,7 @@ function loadTableData(tableName) {
  */
 function bindEvents() {
 	jQuery('#btnGuardar').bind('click', (element) => {
-		guardarRide();
+		guardarRide(obtenerDias());
 	});
 }
 
