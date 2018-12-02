@@ -21,6 +21,7 @@ function insertToTable(tableName, object) {
   object.id = primaryKey;
   tableData.push(object);
   localStorage.setItem(tableName, JSON.stringify(tableData));
+  console.log(tableData);
   return tableData;
 }
 

@@ -1,6 +1,5 @@
 'use strict';
 
-let listRides = [];
 
 function obtenerDias(){
 	let listDias = [];
@@ -13,6 +12,16 @@ function obtenerDias(){
 	return guardarRide(listDias);
 }
 
+function obtenerRides(){
+	let listRides = [];
+	let tableData = JSON.parse(localStorage.getItem(tableName));
+	let usu = sessionStorage.getItem('UsuarioActivo');
+	for (let i = 0; i < length; i++) {
+		if (tableData[i].user == usu){
+			listRides.push(tableData);
+		}
+	}
+}
 
 function guardarRide(dia) {
 	let nom = document.getElementById('nomR').value;
@@ -22,7 +31,7 @@ function guardarRide(dia) {
 	let horaInicio = document.getElementById('hSalida').value;
 	let horaLlegada = document.getElementById('hLlegada').value;
 	let dias = dia;
-	let user = sessionStorage.getItem('Usuario');
+	let user = sessionStorage.getItem('UsuarioActivo');
 
 
 	let ride = {
@@ -38,12 +47,13 @@ function guardarRide(dia) {
 
 	let rides = insertToTable('rides', ride);
 
-	generarTabla('rides', rides);
+	verficarRideUsuario('rides', rides);
+	//generarTabla('rides', rides);
 
 }
 
 function verficarRideUsuario(tableName, tableData){
-		let usu = sessionStorage.getItem('Usuario');
+		let usu = sessionStorage.getItem('UsuarioActivo');
 		usu.forEach(ride => {
 			if (usu == ride.user){
 					generarTabla(nomTabla, tableData);
