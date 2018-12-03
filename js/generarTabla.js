@@ -12,16 +12,17 @@ function obtenerDias(){
 	return guardarRide(listDias);
 }
 
-function obtenerRides(){
+/*function obtenerRides(tableName){
 	let listRides = [];
 	let tableData = JSON.parse(localStorage.getItem(tableName));
 	let usu = sessionStorage.getItem('UsuarioActivo');
-	for (let i = 0; i < length; i++) {
-		if (tableData[i].user == usu){
+	tableData.forEach(ride => {
+		if (usu == ride.user){
 			listRides.push(tableData);
+			console.log('rides de usuario', listRides);
 		}
-	}
-}
+	});
+}*/
 
 function guardarRide(dia) {
 	let nom = document.getElementById('nomR').value;
@@ -73,7 +74,7 @@ function generarTabla(tableName, tableData) {
 	let rows = "";
 	tableData.forEach((rides, index) => {
 		let row = `<tr><td>${rides.nom}</td><td>${rides.lugSalida}</td><td>${rides.lugDestino}</td>
-		<td>${rides.des}</td><td>${rides.horaInicio}</td><td>${rides.horaLlegada}</td><td>${rides.dias}</td>`;
+		<td>${rides.des}</td><td>${rides.horaInicio}</td><td>${rides.horaLlegada}</td><td>${rides.dias}</td><td>${rides.user}</td>`;
 		row += `<td> <a onclick="editEntity(this)" data-id="${rides.id}" data-entity="${tableName}" class="link edit">Edit</a>  |  <a  onclick="deleteEntity(this);" data-id="${rides.id}" data-entity="${tableName}" class="link delete">Delete</a>  </td>`;
 		rows += row + '</tr>';
 	});
