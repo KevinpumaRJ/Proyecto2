@@ -12,17 +12,21 @@ function obtenerDias(){
 	return guardarRide(listDias);
 }
 
-/*function obtenerRides(tableName){
+
+function obtenerRides(){
 	let listRides = [];
-	let tableData = JSON.parse(localStorage.getItem(tableName));
+	let tableData = JSON.parse(localStorage.getItem('rides_table'));
 	let usu = sessionStorage.getItem('UsuarioActivo');
 	tableData.forEach(ride => {
 		if (usu == ride.user){
-			listRides.push(tableData);
-			console.log('rides de usuario', listRides);
+			listRides.push(ride);
+
 		}
 	});
-}*/
+	console.log(listRides);
+	generarTabla('rides_table', listRides);
+	loadTableData('rides_table', listRides);
+}
 
 function guardarRide(dia) {
 	let nom = document.getElementById('nomR').value;
@@ -46,21 +50,23 @@ function guardarRide(dia) {
 		user
 	};
 
-	let rides = insertToTable('rides', ride);
 
-	verficarRideUsuario('rides', rides);
-	//generarTabla('rides', rides);
+	let rides = insertToTable('rides_table', ride);
+
+
+	obtenerRides();
+
 
 }
 
-function verficarRideUsuario(tableName, tableData){
+/*function verficarRideUsuario(tableName, tableData){
 		let usu = sessionStorage.getItem('UsuarioActivo');
 		usu.forEach(ride => {
 			if (usu == ride.user){
-					generarTabla(nomTabla, tableData);
+					generarTabla(tableName, tableData);
 			}
 		});
-}
+}*/
 
 /**
  * Renders an HTML table dinamically
@@ -69,16 +75,17 @@ function verficarRideUsuario(tableName, tableData){
  * @param tableData
  */
 function generarTabla(tableName, tableData) {
-	let table = jQuery(`#${tableName}_table`);
-	// loop through all the items of table and generates the html
+	let table = jQuery(`#${tableName}`);
+
 	let rows = "";
 	tableData.forEach((rides, index) => {
 		let row = `<tr><td>${rides.nom}</td><td>${rides.lugSalida}</td><td>${rides.lugDestino}</td>
 		<td>${rides.des}</td><td>${rides.horaInicio}</td><td>${rides.horaLlegada}</td><td>${rides.dias}</td><td>${rides.user}</td>`;
-		row += `<td> <a onclick="editEntity(this)" data-id="${rides.id}" data-entity="${tableName}" class="link edit">Edit</a>  |  <a  onclick="deleteEntity(this);" data-id="${rides.id}" data-entity="${tableName}" class="link delete">Delete</a>  </td>`;
+		row += `<td> <a class="btn btn-primary" data-toggle="modal" data-target="#emodal">Edit</a>  |  <a onclick="deleteEntity(this);" data-id="${rides.id}" data-entity="${tableName}" class="btn btn-primary link delete">Delete</a>  </td>`;
 		rows += row + '</tr>';
 	});
 	table.html(rows);
+	//onclick="editEntity(this)" data-id="${rides.id}" data-entity="${tableName}" class="link edit"
 }
 
 function editEntity(element) {
@@ -93,8 +100,8 @@ function deleteEntity(element) {
 	generarTabla(dataObj.entity, newEntities);
 }
 
-function loadTableData(tableName) {
-	generarTabla(tableName, getTableData(tableName));
+function loadTableData(tableName, list) {
+	generarTabla(tableName, list);
 }
 
 

@@ -34,13 +34,14 @@ function insertToTable(tableName, object) {
  */
 function deleteFromTable(tableName, objectId) {
   let tableData = JSON.parse(localStorage.getItem(tableName));
+  let usu = sessionStorage.getItem('UsuarioActivo');
 
   if (!tableData) {
     return false;
   }
   let newTableData = [];
   tableData.forEach((element) => {
-    if (element.id != objectId) {
+    if ((element.id != objectId) && (usu == element.user)) {
       newTableData.push(element);
     }
   });

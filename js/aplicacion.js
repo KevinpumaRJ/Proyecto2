@@ -51,7 +51,8 @@ function validarUsu(username, pass){
 				sessionStorage.setItem('UsuarioActivo', username);
 				window.open('Dashboard.html');
 
-			}
+				}
+
 	}
 
 
