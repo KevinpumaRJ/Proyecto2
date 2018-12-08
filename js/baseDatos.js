@@ -5,6 +5,10 @@ function guardarUsuario(list){
   localStorage.setItem('Usuario', JSON.stringify(list));
 }
 
+function saveToLocalStorage2(key, list) {
+  localStorage.setItem(key, JSON.stringify(list));
+}
+
 /**
  * Inserts any object to any table in localstorage
  *

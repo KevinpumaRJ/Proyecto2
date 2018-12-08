@@ -56,6 +56,7 @@ function validarUsu(username, pass){
 	}
 
 
+
 function bindEvents() {
 	jQuery('#btnLog').bind('click', botonLoguin);
 	jQuery('#btnRegistro').bind('click', botonRegistrar);
