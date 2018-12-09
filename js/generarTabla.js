@@ -25,6 +25,7 @@ function obtenerRides(){
 	});
 	console.log(listRides);
 	generarTabla('rides_table', listRides);
+	return listRides;
 	//loadTableData('rides_table', listRides);
 }
 
@@ -54,7 +55,8 @@ function guardarRide(dia) {
 	let rides = insertToTable('rides_table', ride);
 
 
-	obtenerRides();
+	loadTableData('rides_table', obtenerRides());
+	//obtenerRides();
 
 
 }
@@ -109,6 +111,7 @@ function buscarRide(){
 	});
 	console.log(newTable);
 	loadTableData('rides_table', newTable);
+	location.reload(true);
 	//generarTabla('rides_table', newTable);
 }
 
