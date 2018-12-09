@@ -111,7 +111,7 @@ function buscarRide(){
 	});
 	console.log(newTable);
 	loadTableData('rides_table', newTable);
-	location.reload(true);
+	//location.reload(true);
 	//generarTabla('rides_table', newTable);
 }
 
