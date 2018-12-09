@@ -62,7 +62,9 @@ function validarUsu(username, pass){
 	}
 
 
-
+/**
+ * Funcion para llamar las acciones de lo botones
+ */
 function bindEvents() {
 	jQuery('#btnLog').bind('click', botonLoguin);
 	jQuery('#btnRegistro').bind('click', botonRegistrar);

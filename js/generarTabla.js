@@ -1,6 +1,8 @@
 'use strict';
 
-
+/**
+ * Funcion para obtener los dias marcados en un checkboxs
+ */
 function obtenerDias(){
 	let listDias = [];
 	let checkBoxs = document.getElementsByClassName('checks')
@@ -12,7 +14,9 @@ function obtenerDias(){
 	return guardarRide(listDias);
 }
 
-
+/**
+ * Funcion para obtener los rides de un usuario determinado
+ */
 function obtenerRides(){
 	let listRides = [];
 	let tableData = JSON.parse(localStorage.getItem('rides_table'));
@@ -29,6 +33,9 @@ function obtenerRides(){
 	//loadTableData('rides_table', listRides);
 }
 
+/**
+ * Funcion para guardar los rides
+ */
 function guardarRide(dia) {
 	let nom = document.getElementById('nomR').value;
 	let lugSalida = document.getElementById('lSalida').value;
@@ -53,16 +60,19 @@ function guardarRide(dia) {
 
 
 	let rides = insertToTable('rides_table', ride);
+	let ridess = insertToTable('ridesG_table', ride);
 
 
 	loadTableData('rides_table', obtenerRides());
+
+	generarTablaGlobal('ridesG_table', ridess);
 	//obtenerRides();
 
 
 }
 
 /**
- * Renders an HTML table dinamically
+ * Genera una tabla dinamica html para un usuario
  *
  * @param tableName
  * @param tableData
@@ -81,20 +91,59 @@ function generarTabla(tableName, tableData) {
 
 }
 
+
+/**
+ * Genera una tabla dinamica html para un usuario
+ *
+ * @param tableName
+ * @param tableData
+ */
+function generarTablaGlobal(tableName, tableData) {
+	let table = jQuery(`#${tableName}`);
+
+	let rows = "";
+	tableData.forEach((rides, index) => {
+		let row = `<tr><td>${rides.nom}</td><td>${rides.lugSalida}</td><td>${rides.lugDestino}</td>
+		<td>${rides.des}</td><td>${rides.horaInicio}</td><td>${rides.horaLlegada}</td><td>${rides.dias}</td><td>${rides.user}</td>`;
+		row += `<td> <a > Ver detalles </a>  </td>`;
+		rows += row + '</tr>';
+	});
+	table.html(rows);
+
+}
+
+
+/**
+ *Llama los id para sarcar los datos
+ */
 function editEntity(element) {
 	debugger;
 	const dataObj = jQuery(element).data();
 	editElement(dataObj.entity, dataObj.id);
 }
 
+/**
+ * Llama a siertas funciones para realizar el procedimiento de eliminar
+ */
 function deleteEntity(element) {
 	const dataObj = jQuery(element).data();
 	const newEntities = deleteFromTable(dataObj.entity, dataObj.id);
 	generarTabla(dataObj.entity, newEntities);
 }
 
+/**
+ * Genera una tabla predeterminada
+ */
 function loadTableData(tableName, list) {
 	generarTabla(tableName, list);
+
+}
+
+/**
+ * Genera una tabla predeterminada
+ */
+function loadTableDataG(tableName, list) {
+	generarTablaGlobal(tableName, list);
 
 }
 
@@ -111,6 +160,23 @@ function buscarRide(){
 	});
 	console.log(newTable);
 	loadTableData('rides_table', newTable);
+	//location.reload(true);
+	//generarTabla('rides_table', newTable);
+}
+
+function buscarRideGlobal(){
+	debugger;
+	let newTable = [];
+	let tableData = JSON.parse(localStorage.getItem('ridesG_table'));
+	let salida = document.getElementById('inSalidaG').value;
+	let llegada = document.getElementById('inDestG').value;
+	tableData.forEach(ride => {
+		if ((salida == ride.lugSalida) && (llegada == ride.lugDestino)){
+				newTable.push(ride);
+		}
+	});
+	console.log(newTable);
+	loadTableDataG('ridesG_table', newTable);
 	//location.reload(true);
 	//generarTabla('rides_table', newTable);
 }
@@ -162,7 +228,7 @@ function saveEdit(){
 }
 
 function loadTableDataa(tableName) {
-	generarTabla(tableName, getTableData(tableName));
+	generarTablaGlobal(tableName, getTableData(tableName));
 }
 
 /**
@@ -178,10 +244,16 @@ function bindEvents() {
 	jQuery('#btneGuardar').bind('click', (element) => {
 		saveEdit();
 	});
+
+	jQuery('#btnBusTablaG').bind('click', botonBuscarGlobal);
 }
 
 function botonBuscar(element){
 	buscarRide();
+}
+
+function botonBuscarGlobal(element){
+	buscarRideGlobal();
 }
 
 bindEvents();
