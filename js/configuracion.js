@@ -19,14 +19,14 @@ function loadDatos(object){
 
 function saveEditDatos(){
   debugger;
-	let id = sessionStorage.getItem('idDatos');
+	let id = sessionStorage.getItem('UsuarioActivo');
 	let nombre = document.getElementById('inNomC').value.trim();
 	let velo = document.getElementById('inVeloP').value.trim();
 	let descr = $('#DescPer').val();
 
 	let list = getTableData('Usuario');
 	for (var i = 0; i < list.length; i++) {
-		if (id == list[i].id) {
+		if (id == list[i].nomusu) {
 			list[i].nombreCompleto = nombre;
 			list[i].velocidadPromedio = velo;
 			list[i].descripcionP = descr;
