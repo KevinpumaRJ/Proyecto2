@@ -10,6 +10,9 @@ function usuarios() {
   var cell = document.getElementById('Tell').value;
 	var nomusu = document.getElementById('NomUsuario').value;
 	var contra = document.getElementById('Contrasenna').value;
+	var nombreCompleto = "";
+	var velocidadPromedio = "";
+	var descripcionP = "";
 
 	var user = {
 		nombre,
@@ -17,7 +20,10 @@ function usuarios() {
 		apellido2,
     cell,
     nomusu,
-    contra
+    contra,
+		nombreCompleto,
+		velocidadPromedio,
+		descripcionP
 	};
 	console.log('Usuario Registrado');
 	usuario.push(user);
