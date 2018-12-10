@@ -93,7 +93,7 @@ function generarTabla(tableName, tableData) {
 
 
 /**
- * Genera una tabla dinamica html para un usuario
+ * Genera una tabla dinamica html para un usuario global
  *
  * @param tableName
  * @param tableData
@@ -147,6 +147,9 @@ function loadTableDataG(tableName, list) {
 
 }
 
+/**
+ * Funcion para buscar rides de usuario
+ */
 function buscarRide(){
 	debugger;
 	let newTable = [];
@@ -164,6 +167,9 @@ function buscarRide(){
 	//generarTabla('rides_table', newTable);
 }
 
+/**
+ * fucion para buscar rides globales
+ */
 function buscarRideGlobal(){
 	debugger;
 	let newTable = [];
@@ -181,12 +187,18 @@ function buscarRideGlobal(){
 	//generarTabla('rides_table', newTable);
 }
 
+/**
+ * funcion para llamar los datos
+ */
 function edit(element) {
 	let object = jQuery(element).data();
 	loadRide(object.id);
 	console.log(object);
 }
 
+/**
+ * funcion para cargar datos de usuario
+ */
 function loadRide(object){
 	let list = getTableData('rides_table');
 	for (var i = 0; i < list.length; i++) {
@@ -202,6 +214,9 @@ function loadRide(object){
 	sessionStorage.setItem('idCarrera', object);
 }
 
+/**
+ * funcion para editar y guardar los datos
+ */
 function saveEdit(){
 	let id = sessionStorage.getItem('idCarrera');
 	let nombre = document.getElementById('enomR').value.trim();
@@ -227,12 +242,18 @@ function saveEdit(){
 	location.reload(true);
 }
 
+/**
+ * funcion para llamar los datos de un usuario
+ */
 function cDatos(element) {
 	let object = jQuery(element).data();
 	cBDatos(object.id);
 	console.log(object);
 }
 
+/**
+ * funcion para cargar los datos de un usuario
+ */
 function cBDatos(object){
 	let list = getTableData('Usuario');
 	for (var i = 0; i < list.length; i++) {
@@ -245,12 +266,15 @@ function cBDatos(object){
 	sessionStorage.setItem('idDatosP', object);
 }
 
+/**
+ * funcion que carga generarTablaGlobal
+ */
 function loadTableDataa(tableName) {
 	generarTablaGlobal(tableName, getTableData(tableName));
 }
 
 /**
- * Binds the different events to the different elements of the page
+ * Enlaza los diferentes eventos a los diferentes elementos de la página.
  */
 function bindEvents() {
 	jQuery('#btnGuardar').bind('click', (element) => {
@@ -266,10 +290,16 @@ function bindEvents() {
 	jQuery('#btnBusTablaG').bind('click', botonBuscarGlobal);
 }
 
+/**
+ * llama la funcion buscarRide
+ */
 function botonBuscar(element){
 	buscarRide();
 }
 
+/**
+ * llama la funcion buscarRideGlobal
+ */
 function botonBuscarGlobal(element){
 	buscarRideGlobal();
 }

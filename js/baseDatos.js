@@ -5,15 +5,18 @@ function guardarUsuario(list){
   localStorage.setItem('Usuario', JSON.stringify(list));
 }
 
+/**
+ * Almacena una lista de usuarios
+ */
 function saveToLocalStorage2(key, list) {
   localStorage.setItem(key, JSON.stringify(list));
 }
 
 /**
- * Inserts any object to any table in localstorage
+ * inserta una tabla en el localStorage
  *
- * @param {*} tableName the name of the table to insert into
- * @param {*} object the object to insert in the table
+ * @param {*} tableName el nombre de la tabla para insertar
+ * @param {*} object el objeto para insertar en la tabla.
  */
 function insertToTable(tableName, object) {
   let tableData = JSON.parse(localStorage.getItem(tableName));
@@ -31,10 +34,10 @@ function insertToTable(tableName, object) {
 
 
 /**
- * Deletes an specific object from the table in localstorage
+ * Borra un objeto específico de la tabla en localstorage
  *
- * @param tableName the name of the table to delete from
- * @param objectId Id of the object to be deleted
+ * @param tableName el nombre de la tabla para eliminar
+ * @param ID del objeto que se va a eliminar
  */
 function deleteFromTable(tableName, objectId) {
   let tableData = JSON.parse(localStorage.getItem(tableName));
@@ -55,9 +58,9 @@ function deleteFromTable(tableName, objectId) {
 }
 
 /**
- * Get data
+ * optiene datos
  *
- * @param {*} tableName the name of the table to insert into
+ * @param {*} tableName el nombre de la tabla para insertar
  */
 function getTableData(tableName) {
   let tableData = JSON.parse(localStorage.getItem(tableName));
