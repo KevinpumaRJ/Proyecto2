@@ -105,7 +105,7 @@ function generarTablaGlobal(tableName, tableData) {
 	tableData.forEach((rides, index) => {
 		let row = `<tr><td>${rides.nom}</td><td>${rides.lugSalida}</td><td>${rides.lugDestino}</td>
 		<td>${rides.des}</td><td>${rides.horaInicio}</td><td>${rides.horaLlegada}</td><td>${rides.dias}</td><td>${rides.user}</td>`;
-		row += `<td> <a > Ver detalles </a>  </td>`;
+		row += `<td> <a onclick="cDatos(this);" data-id="${rides.user}" data-entity="${tableName}" class="btn btn-primary" data-toggle="modal" data-target="#pmodal"> Ver detalles </a>  </td>`;
 		rows += row + '</tr>';
 	});
 	table.html(rows);
@@ -225,6 +225,24 @@ function saveEdit(){
 	}
 	saveToLocalStorage2('rides_table', list);
 	location.reload(true);
+}
+
+function cDatos(element) {
+	let object = jQuery(element).data();
+	cBDatos(object.id);
+	console.log(object);
+}
+
+function cBDatos(object){
+	let list = getTableData('Usuario');
+	for (var i = 0; i < list.length; i++) {
+		if (object == list[i].nomusu) {
+			jQuery("#pnomR").val(list[i].nombreCompleto);
+			jQuery("#pvelo").val(list[i].velocidadPromedio);
+			jQuery("#pdesc").val(list[i].descripcionP);
+		}
+	}
+	sessionStorage.setItem('idDatosP', object);
 }
 
 function loadTableDataa(tableName) {

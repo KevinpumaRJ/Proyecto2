@@ -1,22 +1,6 @@
-function editDatos(element) {
-	let object = jQuery(element).data();
-	loadDatos(object.id);
-	console.log(object);
-}
-
-function loadDatos(object){
-	let list = getTableData('Usuario');
-	for (var i = 0; i < list.length; i++) {
-		if (object == list[i].id) {
-			jQuery("#inNomC").val(list[i].nombreCompleto);
-			jQuery("#inVeloP").val(list[i].velocidadPromedio);
-			jQuery("#DescPer").val(list[i].descripcionP);
-
-		}
-	}
-	sessionStorage.setItem('idDatos', object);
-}
-
+/**
+ * Funcion para modificar los datos de usuario
+ */
 function saveEditDatos(){
   debugger;
 	let id = sessionStorage.getItem('UsuarioActivo');
@@ -37,11 +21,16 @@ function saveEditDatos(){
 	location.reload(true);
 }
 
-
+/**
+ * Realiza la funcion de los botones
+ */
 function bindEvents() {
 	jQuery('#btnGuardarConf').bind('click', botonGuardarConfiguracion);
 }
 
+/**
+ * Llama la funcion saveEditDatos
+ */
 function botonGuardarConfiguracion(element){
   saveEditDatos();
 }
